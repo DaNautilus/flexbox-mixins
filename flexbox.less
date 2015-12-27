@@ -1,0 +1,198 @@
+/*
+Robert Kleger, 12/2015
+This are useful less mixins to handle different browsers resp. their rendering engines.
+This mixins are inspired by the Mozilla Developer Network.
+https://developer.mozilla.org/en-US/docs/Inbox/Advanced_layouts_with_flexbox
+*/
+
+/* wrapper properties  */
+.bob-display-flex {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flexbox;
+    display: flex;
+}
+
+.bob-inline-flex {
+    display: -webkit-inline-box;
+    display: -webkit-inline-flex;
+    display: -moz-inline-flex;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+}
+
+.bob-flex-direction(@direction: row) {
+    -webkit-flex-direction: @direction;
+    -moz-flex-direction: @direction;
+    -ms-flex-direction: @direction;
+    flex-direction: @direction;
+}
+
+.bob-flex-direction(@direction: row) when (@direction = row) {
+    -webkit-box-direction: normal;
+    -webkit-box-orient: horizontal;
+}
+
+.bob-flex-direction(@direction: row) when (@direction = row-reverse) {
+    -webkit-box-direction: reverse;
+    -webkit-box-orient: horizontal;
+}
+
+.bob-flex-direction(@direction: row) when (@direction = column) {
+    -webkit-box-direction: normal;
+    -webkit-box-orient: vertical;
+}
+
+.bob-flex-direction(@direction: row) when (@direction = column-reverse) {
+    -webkit-box-direction: reverse;
+    -webkit-box-orient: vertical;
+}
+
+.bob-flex-direction(@direction: row) when (@direction = column-reverse) {
+    -webkit-box-direction: reverse;
+    -webkit-box-orient: vertical;
+}
+
+.bob-flex-wrap(@wrap: nowrap){
+    -webkit-flex-wrap: @wrap;
+    -moz-flex-wrap: @wrap;
+    flex-wrap: @wrap;
+}
+
+.bob-flex-wrap(@wrap: nowrap) when (@wrap = nowrap){
+    -ms-flex-wrap: none;
+}
+
+.bob-flex-wrap(@wrap: nowrap) when not (@wrap = nowrap){
+    -ms-flex-wrap: @wrap;
+}
+
+.bob-flex-flow(@flow: row no-wrap) {
+    -webkit-flex-flow: @flow;
+    -moz-flex-flow: @flow;
+    -ms-flex-flow: @flow;
+    flex-flow: @flow;
+}
+
+.bob-justify-content(@justify: flex-start) {
+    -webkit-justify-content: @justify;
+    -moz-justify-content: @justify;
+    justify-content: @justify;
+}
+
+.bob-justify-content(@justify: flex-start) when (@justify = flex-start) {
+    -webkit-box-pack: start;
+    -ms-flex-pack: start;
+}
+
+.bob-justify-content(@justify: flex-start) when (@justify = flex-end) {
+    -webkit-box-pack: end;
+    -ms-flex-pack: end;
+}
+
+.bob-justify-content(@justify: flex-start) when (@justify = space-between) {
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+}
+
+.bob-justify-content(@justify: flex-start) when (@justify = space-around) {
+    -ms-flex-pack: distribute;
+}
+
+.bob-align-items(@align: stretch) {
+    -webkit-align-items: @align;
+    -moz-align-items: @align;
+    align-items: @align;
+}
+
+.bob-align-items(@align: stretch) when (@align = flex-start) {
+    -webkit-box-align: start;
+    -ms-flex-align: start;
+}
+
+.bob-align-items(@align: stretch) when (@align = flex-end) {
+    -webkit-box-align: end;
+    -ms-flex-align: end;
+}
+
+.bob-align-content(@align: stretch) {
+    -webkit-align-content: @align;
+    -moz-align-content: @align;
+    align-content: @align;
+}
+
+.bob-align-content(@align: stretch) when (@align = flex-start) {
+    -ms-flex-line-pack: start;
+}
+
+.bob-align-content(@align: stretch) when (@align = flex-end) {
+    -ms-flex-line-pack: end;
+}
+/* end wrapper properties */
+
+/* item properties  */
+.bob-order(@order: 0) {
+    -webkit-box-ordinal-group: @order + 1;
+    -webkit-order: @order;
+    -moz-order: @order;
+    -ms-flex-order: @order;
+    order: @order;
+}
+
+.bob-flex-grow(@grow: 0) {
+    -webkit-box-flex: @grow;
+    -webkit-flex-grow: @grow;
+    -moz-flex-grow: @grow;
+    -ms-flex-positive: @grow;
+    flex-grow: @grow;
+}
+
+.bob-flex-shrink(@shrink: 1) {
+    -webkit-flex-shrink: @shrink;
+    -moz-flex-shrink: @shrink;
+    -ms-flex-negative: @shrink;
+    flex-shrink: @shrink;
+}
+
+.bob-flex-basis(@basis: auto) {
+    -webkit-flex-basis: @basis;
+    -moz-flex-basis: @basis;
+    -ms-flex-preferred-size: @basis;
+    flex-basis: @basis;
+}
+
+/*This section is commented out due a flex-grow bug*/
+/*
+.bob-flex(@grow: 0; @shrink: 1; @basis: auto) {
+    -webkit-box-flex: @grow;
+    -webkit-flex: @grow @shrink @basis;
+    -moz-box-flex: @grow;
+    -moz-flex: @grow @shrink @basis;
+    -ms-flex: @grow @shrink @basis;
+    flex: @grow @shrink @basis;
+}
+*/
+
+.bob-flex(@flex) {
+    -webkit-flex: @flex;
+    -moz-flex: @flex;
+    -ms-flex: @flex;
+    flex: @flex;
+}
+
+.bob-align-self(@align: auto) {
+    -webkit-align-self: @align;
+    -moz-align-self: @align;
+    align-self: @align;
+    -ms-flex-item-align: @align;
+}
+
+.bob-align-self(@align: auto) when (@align = flex-start) {
+    -ms-flex-item-align: start;
+}
+
+.bob-align-self(@align: auto) when (@align = flex-end) {
+    -ms-flex-item-align: end;
+}
+/* end item properties  */
